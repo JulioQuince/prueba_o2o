@@ -19,23 +19,6 @@ class BeerRepository extends ServiceEntityRepository
         parent::__construct($registry, Beer::class);
     }
 
-    public function getByFood($food){
-        $client = new \GuzzleHttp\Client();
-
-        $response = $client->request('GET', 'https://api.punkapi.com/v2/beers', ['query' => 'food='.$food]);
-
-        $status = $response->getStatusCode();
-
-        if($status != "200"){
-            return "false";
-        }
-
-        $json_data = $response->getBody()->getContents();
-
-        return $json_data;
-
-    }
-
     // /**
     //  * @return Beer[] Returns an array of Beer objects
     //  */
