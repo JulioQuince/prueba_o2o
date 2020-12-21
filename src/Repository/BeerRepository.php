@@ -19,32 +19,36 @@ class BeerRepository extends ServiceEntityRepository
         parent::__construct($registry, Beer::class);
     }
 
-    // /**
-    //  * @return Beer[] Returns an array of Beer objects
-    //  */
-    /*
-    public function findByExampleField($value)
-    {
-        return $this->createQueryBuilder('b')
-            ->andWhere('b.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('b.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
+    public function getByFood($food){
+        $client = new \GuzzleHttp\Client();
 
-    /*
-    public function findOneBySomeField($value): ?Beer
-    {
-        return $this->createQueryBuilder('b')
-            ->andWhere('b.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+        $response = $client->request('GET', 'https://api.punkapi.com/v2/beers', ['query' => 'food='.$food]);
+
+        $status = $response->getStatusCode();
+
+        if($status != "200"){
+            return "false";
+        }
+
+        $json_data = $response->getBody()->getContents();
+
+        return $json_data;
+
     }
-    */
+
+    public function getFoods(){
+        $client = new \GuzzleHttp\Client();
+
+        $response = $client->request('GET', 'https://api.punkapi.com/v2/beers');
+
+        $status = $response->getStatusCode();
+
+        if($status != "200"){
+            return "false";
+        }
+
+        $json_data = $response->getBody()->getContents();
+
+        return $json_data;
+    }
 }
