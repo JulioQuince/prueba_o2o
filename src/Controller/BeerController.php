@@ -41,7 +41,9 @@ class BeerController extends AbstractController
 
             $json_content = $serializer->serialize($reponse_filtered_beers_array,'json');
 
-            $response = new Response(json_encode($json_content));
+
+
+            $response = new Response($json_content);
             $response->headers->set('Content-Type', 'application/json');
 
             return $response;
@@ -80,7 +82,7 @@ class BeerController extends AbstractController
 
             $json_content = $serializer->serialize($reponse_beers_array,'json');
 
-            $response = new Response(json_encode($json_content));
+            $response = new Response($json_content);
             $response->headers->set('Content-Type', 'application/json');
 
             return $response;
