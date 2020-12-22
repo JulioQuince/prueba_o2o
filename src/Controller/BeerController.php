@@ -16,7 +16,7 @@ class BeerController extends AbstractController
     /**
      * @Route("/beers/{food}", name="getBeersByFood")
      */
-    public function getByFood($food): Response
+    public function getByFood($food): Response 
     {
         $encoders = [new JsonEncoder()];
         $normalizers = [new ObjectNormalizer()];
